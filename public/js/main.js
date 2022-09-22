@@ -4,7 +4,6 @@ document.querySelector("button[type='submit'").addEventListener("click", async (
     const formData = new FormData(form)
 
     const file = formData.get("file")
-    console.log(file.size);
 
     if(file.size > 1000000 * 1024){
         console.error("Error: file is larger than 1GB");
