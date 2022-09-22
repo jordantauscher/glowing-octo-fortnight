@@ -11,7 +11,7 @@ document.querySelector("button[type='submit'").addEventListener("click", async (
         return
     }
 
-    const data = await fetch("/compress", {
+    const data = await fetch("https://pdf-compressor-demo.onrender.com/compress", {
         method: "POST",
         body: formData
     })
