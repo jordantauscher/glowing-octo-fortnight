@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/compress" method="post" enctype="multipart/form-data" id="upload-form">
+        <h1>Compress File</h1>
+        <div class="row">
+            <label for="compressionType">Compression Type</label>
+            <select name="compressionType" id="options">
+                <option value="lossless">High Resolution</option>
+                <option value="lossy">Low Resolution</option>
+            </select>
+        </div>
+        <div class="row">
+            <label for="preserveHyperlinks">Preserve Hyperlinks</label>
+            <input type="checkbox" name="preserveHyperlinks" id="preserve-hyperlinks">
+        </div>
+        <div class="row">
+            <label for="file">File</label>
+            <input type="file" name="file" id="upload">
+        </div>
+        <button type="submit">Compress</button>
+    </form>
+    <a id="dl" style="display: none;"></a>
+    <script src="/js/main.js"></script>
+</body>
+</html>
