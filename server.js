@@ -1,7 +1,7 @@
 import express from "express"
 import compress from "./routes/compress.js"
 
-const app = express(), host = 0.0.0.0, port = process.env.PORT || 3001
+const app = express(), host = "0.0.0.0", port = process.env.PORT || 3001
 
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
