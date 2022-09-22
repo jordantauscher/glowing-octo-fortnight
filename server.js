@@ -9,4 +9,4 @@ app.use(express.json())
 app.use(express.static("public"))
 app.use("/compress", compress)
 
-app.listen(port, host, () => console.log(`INIT: server running on PORT: ${port}`))
+app.listen(port, () => console.log(`INIT: server running on PORT: ${port}`))
