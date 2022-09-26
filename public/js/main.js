@@ -2,11 +2,12 @@ const stepNumbersEL = document.querySelectorAll(".number")
 const browseEL = document.querySelector(".browse")
 
 browseEL.addEventListener("change", () => {
+    stepNumbersEL[1].innerHTML = '2'
+    stepNumbersEL[2].innerHTML = '3'
+
     console.log("file selected");
     stepNumbersEL[0].innerHTML = '<i class="fa-solid fa-check"></i>'
 })
-
-
 
 
 document.querySelector("input[type='submit'").addEventListener("click", async (e) => {
@@ -43,6 +44,7 @@ document.querySelector("input[type='submit'").addEventListener("click", async (e
         link.click()
 
         window.URL.revokeObjectURL(url)
+
         return
     } else {
         console.error("ERROR: unknown content-type sent by server " + data.headers.get("Content-Type"))
