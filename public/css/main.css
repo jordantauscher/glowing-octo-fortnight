@@ -171,7 +171,8 @@ form{
     background-color: var(--secondary-colour);
     border: 3px dashed var(--accent-colour);
     height: 350px;
-    margin: 3rem auto !important;
+    margin: 3rem auto;
+    margin-bottom: 2rem;
     position: relative;
 }
 
