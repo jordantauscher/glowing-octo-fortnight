@@ -1,4 +1,4 @@
-document.querySelector("button[type='submit'").addEventListener("click", async (e) => {
+document.querySelector("input[type='submit'").addEventListener("click", async (e) => {
     e.preventDefault()
     const form = document.querySelector("form")
     const formData = new FormData(form)
@@ -10,7 +10,7 @@ document.querySelector("button[type='submit'").addEventListener("click", async (
         return
     }
 
-    const data = await fetch("https://pdfcompressordemo.up.railway.app/compress", {
+    const data = await fetch("/compress", {
         method: "POST",
         body: formData
     })

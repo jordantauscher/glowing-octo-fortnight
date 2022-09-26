@@ -1,40 +1,199 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+:root{
+    --primary-colour: #f26363;
+    --secondary-colour: #fff;
+    --accent-colour: #E32929;
+}
+
 *{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
 
-h1{
-    margin: 0;
-    padding-top: 1rem;
-    padding-bottom: 1.5rem;
+form{
 }
 
-form{
+body{
+    font-family: 'Inter', sans-serif;
+    color: var(--secondary-colour);
+    position: relative;
+}
+
+label{
+    display: inline-block;
+}
+
+input[type="file"]{
+    display: none;
+}
+
+input[type="submit"]{
+    display: none;
+}
+
+.icon{
+}
+
+.card{
+    text-align: center;
+    background-color: #f4f0f0;
+    padding: 1.5rem;
+    color: var(--primary-colour);
+    line-height: 250%;
+    margin: 0 1rem;
+    border-radius: 20px;
+    max-width: 200px;
+}
+
+.card .title{
+    font-weight: 500;
+    font-size: 1.3rem;
+    line-height: 120%;
+    margin: 1rem;
+}
+
+.logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--secondary-colour);
+}
+
+.background{
+    background-color: var(--primary-colour);
+    height: 50%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    z-index: -9999;
+}
+
+.container{
+    width: 400px;
+    margin: 0 auto;
+}
+
+.grid-70-30{
+    display: grid;
+    grid-template-columns: 70% 30%;
+}
+
+.grid-3{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.center-self{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.center-content{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    line-height: 1.5rem;
-    background-color: #faf9f9;
-    border-radius: 1rem;
-    padding: 2rem 3rem;
-    min-width: 350px;
 }
 
-label{
-    padding: 1rem;
+.heading{
+    padding: 2.5rem;
+    text-align: center;
+    font-size: 2.2rem;
 }
 
-.row{
+.steps{
+    list-style: none;
+    list-style-position: inside;
+}
+
+.steps li {
+    position: absolute;
+}
+
+.steps .step{
     display: flex;
     align-items: center;
+    margin: 1.5rem 0;
 }
 
-.row:first-of-type{
-    margin-top: 1rem;
+.steps .step .number{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    color: var(--primary-colour);
+    border-radius: 50%;
+    height: 30px;
+    flex-basis: 30px;
+    flex-shrink: 0;
 }
 
-.row:last-of-type{
-    margin-bottom: 1rem;
+.steps .step .task{
+    padding: 0 1rem;
+}
+
+.btn{
+    text-align: center;
+    text-transform: capitalize;
+    border: 2px solid var(--primary-colour);
+    padding: 1.2rem 0;
+    width: 150px;
+    cursor: pointer;
+    border-radius: 15px;
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin: 1rem 0;
+}
+
+.browse{
+    background-color: var(--secondary-colour);
+    color: var(--primary-colour);
+}
+
+.submit{
+    background-color: var(--primary-colour);
+    color: var(--secondary-colour);
+}
+
+header{
+    background-color: var(--primary-colour);
+}
+
+main{
+    position: relative;
+}
+
+form{
+    background-color: var(--secondary-colour);
+    border: 3px dashed var(--accent-colour);
+    height: 350px;
+    margin: 3rem auto !important;
+    position: relative;
+}
+
+footer{
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 600px){
+    .grid-3{
+        display: block;
+    }
+
+    .card{
+        margin: 2rem auto;
+    }
+}
+
+@media screen and (max-width: 450px){
+    .container{
+        width: 300px;
+    }
+
+    
 }

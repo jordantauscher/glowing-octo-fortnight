@@ -4,30 +4,75 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <link rel="stylesheet" href="/css/main.css">
-    <title>Document</title>
+    <title>PDF compressor demo</title>
 </head>
 <body>
-    <form action="/compress" method="post" enctype="multipart/form-data" id="upload-form">
-        <h1>Compress File</h1>
-        <div class="row">
-            <label for="compressionType">Compression Type</label>
-            <select name="compressionType" id="options">
-                <option value="lossless">High Resolution</option>
-                <option value="lossy">Low Resolution</option>
-            </select>
+    <header>
+        <div class="container">
+
+            <h1 class="heading">Compress PDF</h1>
+            <div class="grid-70-30">
+                
+                <div class="steps">
+                    <div class="step">
+                        <div class="number">1</div>
+                        <div class="task">Choose file</div>
+                    </div>
+                    <div class="step">
+                        <div class="number">2</div>
+                        <div class="task">Click compress</div>
+                    </div>
+                    <div class="step">
+                        <div class="number">3</div>
+                        <div class="task">Enjoy your new document</div>
+                    </div>
+                </div>
+                
+                <div class="logo">
+                    <i class="fa-regular fa-file-pdf fa-6x"></i>
+                </div>
+                
+            </div>
         </div>
-        <div class="row">
-            <label for="preserveHyperlinks">Preserve Hyperlinks</label>
-            <input type="checkbox" name="preserveHyperlinks" id="preserve-hyperlinks">
+    </header>
+    
+    <main class="center-content">
+        <div class="background"></div>
+        <div  class="container">
+            <form action="/compress" method="post" enctype="multipart/form-data" id="upload-form" class="center-content">
+                <label class="browse btn">
+                    browse
+                    <input type="file" name="file" id="upload">
+                </label>
+                
+                <label class="submit btn">
+                    compress
+                    <input type="submit">
+                </label>
+                
+            </form>
         </div>
-        <div class="row">
-            <label for="file">File</label>
-            <input type="file" name="file" id="upload">
+    </main>
+
+    <footer class="grid-3">
+        <div class="card">
+            <i class="fa-solid fa-shield-halved fa-3x"></i>
+            <h3 class="title">Privacy Focus</h3>
         </div>
-        <button type="submit">Compress</button>
-    </form>
+
+        <div class="card">
+            <i class="fa-solid fa-feather fa-3x"></i>
+            <h3 class="title">Feather Weight</h3>
+        </div>
+
+        <div class="card">
+            <i class="fa-solid fa-gauge-high fa-3x"></i>
+            <h3 class="title">Fast Transfer</h3>
+        </div>
+    </footer>
+
     <a id="dl" style="display: none;"></a>
     <script src="/js/main.js"></script>
 </body>
