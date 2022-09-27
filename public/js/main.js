@@ -16,6 +16,7 @@ submitBtnEL.addEventListener("click", async (e) => {
     e.preventDefault()
     
     stepNumberValue(1, '<i class="fa-solid fa-check"></i>')
+    submitBtnEL.children[0].innerText = "Compressing"
     
     const form = document.querySelector("form")
     const formData = new FormData(form)
@@ -36,8 +37,6 @@ submitBtnEL.addEventListener("click", async (e) => {
         method: "POST",
         body: formData
     })
-
-    submitBtnEL.children[0].innerText = "Compressing"
 
     if(data.headers.get("Content-Type").includes("application/json")){
         serverResponseJSON(data)
