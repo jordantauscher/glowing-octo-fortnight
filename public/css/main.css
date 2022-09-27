@@ -4,15 +4,13 @@
     --primary-colour: #f26363;
     --secondary-colour: #fff;
     --accent-colour: #E32929;
+    --warning-colour: rgb(85, 139, 238);
 }
 
 *{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-}
-
-form{
 }
 
 body{
@@ -33,7 +31,11 @@ input[type="submit"]{
     display: none;
 }
 
-.icon{
+.demo-notice{
+    background-color: var(--warning-colour);
+    text-align: center;
+    padding: 1rem;
+    font-size: 1rem;
 }
 
 .card{
@@ -147,6 +149,11 @@ input[type="submit"]{
     font-weight: 600;
     font-size: 1.2rem;
     margin: 1rem 0;
+    user-select: none; /* supported by Chrome and Opera */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
 }
 
 .browse{
@@ -157,6 +164,19 @@ input[type="submit"]{
 .submit{
     background-color: var(--primary-colour);
     color: var(--secondary-colour);
+}
+
+.notification{
+    display: none;
+    position: absolute;
+    width: 50%;
+    background-color: var(--primary-colour);
+    color: var(--secondary-colour);
+    padding: 1rem;
+    z-index: 1;
+    border-radius: 10px;
+    text-align: center;
+    line-height: 150%;
 }
 
 header{
@@ -195,6 +215,4 @@ footer{
     .container{
         width: 300px;
     }
-
-    
 }

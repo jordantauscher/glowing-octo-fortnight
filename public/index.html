@@ -9,6 +9,7 @@
     <title>PDF compressor demo</title>
 </head>
 <body>
+    <div class="demo-notice">Notice: This website runs on a free server and will spin down upon inactivity, it can take up to 30 seconds to spin up again. Please consider this when waiting for files to compress.</div>
     <header>
         <div class="container">
 
@@ -42,13 +43,14 @@
         <div class="background"></div>
         <div  class="container">
             <form action="/compress" method="post" enctype="multipart/form-data" id="upload-form" class="center-content">
+                <div class="notification"></div>
                 <label class="browse btn">
-                    browse
+                    <div class="btn-text">browse</div>
                     <input type="file" name="file" id="upload">
                 </label>
                 
                 <label class="submit btn">
-                    compress
+                    <div class="btn-text">compress</div>
                     <input type="submit">
                 </label>
                 

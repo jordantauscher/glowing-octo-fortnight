@@ -42,7 +42,7 @@ async function processFile(req, res, next){
         await deleteFileFromServer(compressedFile)
     } else {
         console.log(`STATUS: incoming file is not pdf (rejected)`);
-        res.json({error: {msg: "file rejected"}})
+        res.json({error: {msg: "Please select a valid pdf file to continue"}})
     }
 
     async function compressFile(file, options){

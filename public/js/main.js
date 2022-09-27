@@ -1,23 +1,34 @@
-const stepNumbersEL = document.querySelectorAll(".number")
-const browseEL = document.querySelector(".browse")
+const browseBtnEL = document.querySelector(".browse")
+const submitBtnEL = document.querySelector(".submit")
 
-browseEL.addEventListener("change", () => {
-    stepNumbersEL[1].innerHTML = '2'
-    stepNumbersEL[2].innerHTML = '3'
-    stepNumbersEL[0].innerHTML = '<i class="fa-solid fa-check"></i>'
+function resetStepNumberValues() {
+    stepNumberValue(1, "2")
+    stepNumberValue(2, "3")
+    stepNumberValue(0, '<i class="fa-solid fa-check"></i>')
+}
+
+browseBtnEL.addEventListener("change", () => {
+    resetStepNumberValues()
+    browseBtnEL.children[0].innerText = "Selected"
 })
 
-
-document.querySelector("input[type='submit'").addEventListener("click", async (e) => {
-    stepNumbersEL[1].innerHTML = '<i class="fa-solid fa-check"></i>'
+submitBtnEL.addEventListener("click", async (e) => {
     e.preventDefault()
+    
+    stepNumberValue(1, '<i class="fa-solid fa-check"></i>')
+    
     const form = document.querySelector("form")
     const formData = new FormData(form)
 
     const file = formData.get("file")
 
-    if(file.size > 1000000 * 1024){
-        console.error("Error: file is larger than 1GB");
+    if(file.size > 1000000 * 100) {
+        fileTooLarge()
+        return
+    }
+
+    if(file.type !== "application/pdf") {
+        fileNotPDF()
         return
     }
 
@@ -26,26 +37,78 @@ document.querySelector("input[type='submit'").addEventListener("click", async (e
         body: formData
     })
 
+    browseBtnEL.children[0].innerText = "Browse"
+
     if(data.headers.get("Content-Type").includes("application/json")){
-        const json = await data.json()
-        console.log(json)
+        serverResponseJSON(data)
         return
     } else if(data.headers.get("Content-Type").includes("application/pdf")){
-        const blob = await data.blob()
-        const url = window.URL.createObjectURL(new Blob([blob]))
-        
-        stepNumbersEL[2].innerHTML = '<i class="fa-solid fa-check"></i>'
-
-        const link = document.querySelector("#dl")
-        link.href = url
-        link.download = file.name
-        link.click()
-
-        window.URL.revokeObjectURL(url)
-
+        serverResponsePDF(data, file)
         return
     } else {
-        console.error("ERROR: unknown content-type sent by server " + data.headers.get("Content-Type"))
+        serverResponseUnknown()
         return
     }
 })
+
+function createNotification(text){
+    const notificationEL = document.querySelector(".notification")
+
+    if(notificationEL.innerText === text) return
+    
+    setTimeout(clearNotifications, 3000)
+
+    notificationEL.innerText = text
+    notificationEL.style.display = "block"
+
+    browseBtnEL.style.display = "none"
+    submitBtnEL.style.display = "none"
+
+
+    function clearNotifications(){
+        notificationEL.style.display = "none"
+        notificationEL.innerText = ""
+
+        browseBtnEL.style.display = "block"
+        submitBtnEL.style.display = "block"
+    }
+}
+
+function stepNumberValue(index, value){
+    const stepNumbers = document.querySelectorAll(".number")
+    stepNumbers[index].innerHTML = value
+}
+
+function fileTooLarge(){
+    createNotification("Please select a file smaller than 100MB");
+    resetStepNumberValues()
+    return
+}
+
+function fileNotPDF(){
+    createNotification("Please select a valid PDF file to continue")
+    resetStepNumberValues()
+}
+
+async function serverResponseJSON(data){
+    const json = await data.json()
+    createNotification(json.error.msg)
+}
+
+async function serverResponsePDF(data, file){
+    const blob = await data.blob()
+        const url = window.URL.createObjectURL(new Blob([blob]))
+        
+        stepNumberValue(2, '<i class="fa-solid fa-check"></i>')
+        const link = document.querySelector("#dl")
+        link.href = url
+        link.download = file.name.replace(".pdf", " compressed.pdf")
+        link.click()
+
+        window.URL.revokeObjectURL(url)
+}
+
+function serverResponseUnknown(){
+    stepNumberValue(2, "3")
+    console.error("ERROR: unknown content-type sent by server " + data.headers.get("Content-Type"))
+}
