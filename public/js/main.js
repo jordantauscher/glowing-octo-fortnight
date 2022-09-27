@@ -14,9 +14,9 @@ browseBtnEL.addEventListener("change", () => {
 
 submitBtnEL.addEventListener("click", async (e) => {
     e.preventDefault()
-    
-    stepNumberValue(1, '<i class="fa-solid fa-check"></i>')
+
     submitBtnEL.children[0].innerText = "Compressing"
+    stepNumberValue(1, '<i class="fa-solid fa-check"></i>')
     
     const form = document.querySelector("form")
     const formData = new FormData(form)
@@ -81,12 +81,14 @@ function stepNumberValue(index, value){
 function fileTooLarge(){
     createNotification("Please select a file smaller than 100MB");
     resetStepNumberValues()
+    submitBtnEL.children[0].innerText = "Compress"
     return
 }
 
 function fileNotPDF(){
     createNotification("Please select a valid PDF file to continue")
     resetStepNumberValues()
+    submitBtnEL.children[0].innerText = "Compress"
 }
 
 async function serverResponseJSON(data){
