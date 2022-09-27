@@ -37,7 +37,7 @@ submitBtnEL.addEventListener("click", async (e) => {
         body: formData
     })
 
-    browseBtnEL.children[0].innerText = "Browse"
+    submitBtnEL.children[0].innerText = "Compressing"
 
     if(data.headers.get("Content-Type").includes("application/json")){
         serverResponseJSON(data)
@@ -104,6 +104,9 @@ async function serverResponsePDF(data, file){
         link.href = url
         link.download = file.name.replace(".pdf", " compressed.pdf")
         link.click()
+
+        browseBtnEL.children[0].innerText = "Browse"
+        submitBtnEL.children[0].innerText = "Compress"
 
         window.URL.revokeObjectURL(url)
 }
