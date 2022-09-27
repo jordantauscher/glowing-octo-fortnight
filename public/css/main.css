@@ -198,7 +198,7 @@ form{
 
 footer{
     max-width: 600px;
-    margin: 0 auto;
+    margin: 2rem auto;
 }
 
 @media screen and (max-width: 600px){
