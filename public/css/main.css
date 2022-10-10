@@ -325,3 +325,9 @@ footer{
         width: 300px;
     }
 }
+
+@media screen and (max-width: 383px){
+    footer{
+        display: block;
+    }
+}
