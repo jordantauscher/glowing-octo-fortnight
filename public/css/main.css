@@ -244,13 +244,15 @@ form{
 }
 
 footer{
-    padding: 1rem;
+    padding: 1.5rem 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     color: var(--secondary-colour);
     margin-top: 2rem;
     background-color: var(--primary-colour);
+    word-wrap: none;
+
 }
 
 .sign-off{
@@ -271,7 +273,7 @@ footer{
 
 .sign-off .slogan{
     font-size: 1rem;
-    padding: 1rem;
+    padding-left: 1rem;
 }
 
 .footer-nav{
@@ -284,13 +286,18 @@ footer{
     margin: 1rem;
 }
 
-.copyright{
-    padding: 1rem;
-    padding-top: 0;
-    padding-left: 2rem;
+@media screen and (max-width: 800px){
+    footer{
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .sign-off{
+        margin-bottom: 1.5rem;
+    }
 }
 
-@media screen and (max-width: 600px){
+@media screen and (max-width: 650px){
     .flex-alternate{
         display: block;
     }
