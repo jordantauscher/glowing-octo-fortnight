@@ -31,11 +31,37 @@ input[type="submit"]{
     display: none;
 }
 
+a{
+    color: #242424;
+    text-decoration: none;
+}
+
+a:hover{
+    color: var(--primary-colour);
+}
+
+a.link-alt{
+    color: var(--secondary-colour);
+}
+
+a.link-alt:hover{
+    text-decoration: underline;
+}
+
+#terms{
+    display: flex;
+    justify-content: center;
+}
+
 .demo-notice{
     background-color: var(--warning-colour);
     text-align: center;
     padding: 1rem;
     font-size: 1rem;
+}
+
+.cards{
+    margin: 1rem 0;
 }
 
 .card{
@@ -44,9 +70,9 @@ input[type="submit"]{
     padding: 1.5rem;
     color: var(--primary-colour);
     line-height: 250%;
-    margin: 0 1rem;
+    margin: 1rem;
     border-radius: 20px;
-    max-width: 200px;
+    width: 44%;
 }
 
 .card .title{
@@ -55,6 +81,16 @@ input[type="submit"]{
     line-height: 120%;
     margin: 1rem;
 }
+
+.card .text{
+    line-height: 150%;
+    color: #242424;
+}
+
+.card:nth-child(3n){
+    width: 100%;
+}
+
 
 .logo{
     display: flex;
@@ -73,8 +109,13 @@ input[type="submit"]{
 }
 
 .container{
-    width: 400px;
+    width: 600px;
     margin: 0 auto;
+}
+
+.flex-alternate{
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .grid-70-30{
@@ -104,7 +145,13 @@ input[type="submit"]{
 .heading{
     padding: 2.5rem;
     text-align: center;
-    font-size: 2.2rem;
+    font-size: 2.4rem;
+}
+
+.section-title{
+    color: #242424;
+    text-align: center;
+    font-size: 1.5rem;
 }
 
 .steps{
@@ -197,17 +244,64 @@ form{
 }
 
 footer{
-    max-width: 600px;
-    margin: 2rem auto;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--secondary-colour);
+    margin-top: 2rem;
+    background-color: var(--primary-colour);
+}
+
+.sign-off{
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    padding-left: 0;
+    border-top: 3px solid var(--primary-colour);
+    height: 1rem;
+}
+
+.sign-off .brand{
+    font-size: 2rem;
+    font-weight: bold;
+    border-right: 2px solid var(--secondary-colour);
+    padding-right: 1rem;
+}
+
+.sign-off .slogan{
+    font-size: 1rem;
+    padding: 1rem;
+}
+
+.footer-nav{
+    display: flex;
+    padding-left: 1rem;
+    list-style: none;
+}
+
+.footer-nav li{
+    margin: 1rem;
+}
+
+.copyright{
+    padding: 1rem;
+    padding-top: 0;
+    padding-left: 2rem;
 }
 
 @media screen and (max-width: 600px){
-    .grid-3{
+    .flex-alternate{
         display: block;
     }
 
     .card{
         margin: 2rem auto;
+        width: auto;
+    }
+
+    .container{
+        width: 400px;
     }
 }
 

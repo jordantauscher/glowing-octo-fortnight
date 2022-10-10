@@ -15,39 +15,45 @@ browseBtnEL.addEventListener("change", () => {
 submitBtnEL.addEventListener("click", async (e) => {
     e.preventDefault()
 
-    submitBtnEL.children[0].innerText = "Compressing"
-    stepNumberValue(1, '<i class="fa-solid fa-check"></i>')
+    try {
+        submitBtnEL.children[0].innerText = "Compressing"
+        stepNumberValue(1, '<i class="fa-solid fa-check"></i>')
+        
+        const form = document.querySelector("form")
+        const formData = new FormData(form)
     
-    const form = document.querySelector("form")
-    const formData = new FormData(form)
+        const file = formData.get("file")
+    
+        if(file.size > 1000000 * 100) {
+            throw "Please select a file smaller than 100MB"
+        }
+    
+        if(file.type !== "application/pdf") {
+            throw "Please select a valid PDF file to continue"
+        }
+    
+        const data = await fetch("/compress", {
+            method: "POST",
+            body: formData
+        })
+    
+        if(data.headers.get("Content-Type").includes("application/json")){
+            const json = await data.json()
+            throw json.error.msg
+        } else if(data.headers.get("Content-Type").includes("application/pdf")){
+            serverResponsePDF(data, file)
+            return
+        } else {
+            console.error("ERROR: unknown content-type sent by server " + data.headers.get("Content-Type"))
+            throw "We're sorry our compression service is not functioning correctly at the momment. please try again later"
+        }
 
-    const file = formData.get("file")
-
-    if(file.size > 1000000 * 100) {
-        fileTooLarge()
-        return
+    } catch (error) {
+        createNotification(error)
+        resetStepNumberValues()
+        submitBtnEL.children[0].innerText = "Compress"
     }
-
-    if(file.type !== "application/pdf") {
-        fileNotPDF()
-        return
-    }
-
-    const data = await fetch("/compress", {
-        method: "POST",
-        body: formData
-    })
-
-    if(data.headers.get("Content-Type").includes("application/json")){
-        serverResponseJSON(data)
-        return
-    } else if(data.headers.get("Content-Type").includes("application/pdf")){
-        serverResponsePDF(data, file)
-        return
-    } else {
-        serverResponseUnknown()
-        return
-    }
+    
 })
 
 function createNotification(text){
@@ -78,24 +84,6 @@ function stepNumberValue(index, value){
     stepNumbers[index].innerHTML = value
 }
 
-function fileTooLarge(){
-    createNotification("Please select a file smaller than 100MB");
-    resetStepNumberValues()
-    submitBtnEL.children[0].innerText = "Compress"
-    return
-}
-
-function fileNotPDF(){
-    createNotification("Please select a valid PDF file to continue")
-    resetStepNumberValues()
-    submitBtnEL.children[0].innerText = "Compress"
-}
-
-async function serverResponseJSON(data){
-    const json = await data.json()
-    createNotification(json.error.msg)
-}
-
 async function serverResponsePDF(data, file){
     const blob = await data.blob()
         const url = window.URL.createObjectURL(new Blob([blob]))
@@ -110,9 +98,4 @@ async function serverResponsePDF(data, file){
         submitBtnEL.children[0].innerText = "Compress"
 
         window.URL.revokeObjectURL(url)
-}
-
-function serverResponseUnknown(){
-    stepNumberValue(2, "3")
-    console.error("ERROR: unknown content-type sent by server " + data.headers.get("Content-Type"))
 }
